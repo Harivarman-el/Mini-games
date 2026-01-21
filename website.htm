@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper and Scissors</title>
+</head>
+<body>
+  <button onclick="
+    userMove = 0;
+    computerMove =  Math.floor(Math.random()*3);
+    computerMoveString = computerMove === 0 ? 'rock' : computerMove === 1 ? 'paper' : 'scissors';
+    if(computerMove === 0){
+      result = 'tie';
+      tie++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      tieId.innerHTML = `Tie :${tie}`;
+    }else if(computerMove === 1){
+      result = 'lose';
+      lose++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      loseId.innerHTML = `Lose : ${lose}`;
+    }else if(computerMove === 2){
+      result = 'win';
+      win++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      winId.innerHTML = `Wins : ${win}`;
+    }
+    console.log(`Computer chose ${computerMoveString}\n`);
+    console.log(`Its a ${result}`);
+  ">Rock</button>
+  <button onclick="
+    userMove = 1;
+    computerMove =  Math.floor(Math.random()*3);
+    computerMoveString = computerMove === 0 ? 'rock' : computerMove === 1 ? 'paper' : 'scissors';
+    if(computerMove === 1){
+      result = 'tie';
+      tie++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      tieId.innerHTML = `Tie :${tie}`;
+    }else if(computerMove === 0){
+      result = 'win';
+      win++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      winId.innerHTML = `Wins : ${win}`;
+    }else if(computerMove === 2){
+      result = 'lose';
+      lose++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      loseId.innerHTML = `Lose : ${lose}`;
+    }
+    console.log(`Computer chose ${computerMoveString}\n`);
+    console.log(`Its a ${result}`);
+  ">Paper</button>
+  <button onclick="
+    userMove = 2;
+    computerMove =  Math.floor(Math.random()*3);
+    computerMoveString = computerMove === 0 ? 'rock' : computerMove === 1 ? 'paper' : 'scissors';
+    if(computerMove === 2){
+      result = 'tie';
+      tie++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      tieId.innerHTML = `Tie :${tie}`;
+    }else if(computerMove === 0){
+      result = 'lose';
+      lose++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      loseId.innerHTML = `Lose : ${lose}`;
+    }else if(computerMove === 1){
+      result = 'win';
+      win++;
+      numberOfMatches++;
+      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
+      winId.innerHTML = `Wins : ${win}`;
+    }
+    console.log(`Computer chose ${computerMoveString}\n`);
+    console.log(`Its a ${result}\n`);
+  ">Scissors</button>
+  <p id="nofmatches">Number of Matches Played : 0</p>
+  <p id="wins">Wins  : 0</p>
+  <p id="lose">Loses : 0</p>
+  <p id="tie">Tie   : 0</p>
+  <script>
+    let result = 'win';
+    let computerMove = 0;
+    let computerMoveString = 'rock';
+    let userMove = 0;
+    let win = 0;
+    let lose = 0;
+    let tie = 0;
+    let numberOfMatches = 0;
+    let nofmatchesId = document.getElementById('nofmatches');
+    let winId = document.getElementById('wins');
+    let loseId = document.getElementById('lose');
+    let tieId = document.getElementById('tie');
+  </script>
+</body>
+</html>
