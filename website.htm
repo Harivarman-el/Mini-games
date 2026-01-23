@@ -4,19 +4,145 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rock Paper and Scissors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Macondo&display=swap" rel="stylesheet">
+
+  <style>
+    body{
+      padding-top: 10px;
+      margin: 0;
+      color: aliceblue;
+      background-color: black;
+    }
+
+    .image{
+      width : 180px;
+      height: 180px;
+      cursor: pointer;
+      border-radius: 50%;
+      margin-right: 14px;
+      transition: transform 0.35s;
+    }
+
+    .image:hover{
+      transform: scale(1.05,1.05);
+    }
+
+    .big-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }    
+
+    .outer-image-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex: 2;
+    }
+
+    .image-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .stats-container{
+      flex:1;
+      font-family: Macondo;
+      font-size: 25px;
+    }
+
+    .rock-container,
+    .paper-container,
+    .scissor-container{
+      /* */
+    }
+
+    .rock{
+      top: 1px;
+    }
+
+    .head{
+      font-family: macondo;
+      text-align : center;
+      border-bottom: 50px;
+      font-size: 40px;
+    }
+
+    .move-display-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .move-display-container p{
+      font-family: macondo;
+      font-size: 25px;
+    }
+
+    .display-user-move,
+    .display-computer-move{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .computer-move-image,
+    .user-move-image{
+      width : 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin-right: 14px;
+      border: none;
+    }
+    
+  </style>
 </head>
 <body>
+  <h1 class="head">Rock Paper Scissors</h1>
 
-  <button onclick="playGame(0)">Rock</button>
-  <button onclick="playGame(1)">Paper</button>
-  <button onclick="playGame(2)">Scissors</button>
+  <div class="big-container">
+    <div class="outer-image-container">
+      <div class="image-container">
+        <div class="rock-container">
+          <img onclick="playGame(0)" src="images/rock.jpg" class="rock image" alt="rock-image">
+        </div>
+        <div class="paper-container">
+          <img onclick="playGame(1)" src="images/paper.jpg" class="paper image" alt="paper-image">
+        </div>
+        <div class="scissor-container">
+          <img onclick="playGame(2)" src="images/scissor.jpg" class="scissor image" alt="scissor-image">
+        </div>
+      </div>
+      <div class="move-display-container">
+        <div class="display-user-move">
+          <p class="user-move-text" id="usermovetxt"></p>
+          <img class="user-move-image" id="usermoveimg">
+        </div>
+        <div class="display-computer-move">
+          <p class="computer-move-text" id="computermovetxt"></p>
+          <img class="computer-move-image" id="computermoveimg">
+        </div>
+      </div>
+    </div>
+    
 
-
-  <p id="nofmatches">Number of Matches Played : 0</p>
-  <p id="wins">Wins  : 0</p>
-  <p id="lose">Loses : 0</p>
-  <p id="tie">Tie   : 0</p>
-
+    <div class="stats-container">
+      <p id="nofmatches">Number of Matches Played : 0</p>
+      <p id="wins">Wins  : 0</p>
+      <p id="lose">Loses : 0</p>
+      <p id="tie">Tie   : 0</p>
+    </div>
+  </div>
+  
 
   <script>
     let win = 0;
@@ -27,7 +153,10 @@
     let winId = document.getElementById('wins');
     let loseId = document.getElementById('lose');
     let tieId = document.getElementById('tie');
-
+    let computerMoveTextId = document.getElementById('computermovetxt');
+    let computerMoveImgId = document.getElementById('computermoveimg');
+    let userMoveTextId = document.getElementById('usermovetxt');
+    let userMoveImgId = document.getElementById('usermoveimg');
 
     function getComputerMove(){
       let computerMove = Math.floor(Math.random()*3);
@@ -50,19 +179,29 @@
     function displayStats(result){
       numberOfMatches++ ;
       (result === 'win')? win++ :(result === 'lose')? lose++ : tie++ ;
-      nofmatchesId.innerHTML = `Number of matches played : ${numberOfMatches}`;
-      loseId.innerHTML = `Lose : ${lose}`;
-      winId.innerHTML = `Wins : ${win}`;
-      tieId.innerHTML = `Tie :${tie}`;
+      nofmatchesId.textContent = `Number of matches played : ${numberOfMatches}`;
+      loseId.textContent = `Lose : ${lose}`;
+      winId.textContent = `Wins : ${win}`;
+      tieId.textContent = `Tie :${tie}`;
+    }
+
+    function displayMove(userMove,computerMove){
+      userMoveTextId.textContent = "Your Move";
+      (userMove == 0) ? userMoveImgId.setAttribute('src','images/rock.jpg'):(userMove == 1) ? userMoveImgId.setAttribute('src','images/paper.jpg'):userMoveImgId.setAttribute('src','images/scissor.jpg');
+
+      computerMoveTextId.textContent = "Computer move";
+      (computerMove == 0) ? computerMoveImgId.setAttribute('src','images/rock.jpg'):(computerMove == 1) ? computerMoveImgId.setAttribute('src','images/paper.jpg'):computerMoveImgId.setAttribute('src','images/scissor.jpg');
     }
 
     function playGame(userMove){
-      computerMove = getComputerMove();
-      result = getResult(userMove,computerMove);
+      const computerMove = getComputerMove();
+      const result = getResult(userMove,computerMove);
       displayStats(result)
       console.log(`Its a ${result}`);
+      displayMove(userMove,computerMove);
     }
 
+    
   </script>
 </body>
 </html>
